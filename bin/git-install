@@ -5,9 +5,16 @@ version=$1
 source_dir=${working_dir}/git-${version}
 build_log=${working_dir}/git-${version}.log
 
+create_working_dir() {
+  mkdir -p ${working_dir}
+}
+
+initialize_build_log() {
+  cat /dev/null > ${build_log}
+}
+
 download_git() {
   echo 'Downloading...'
-  mkdir -p ${working_dir}
   cd ${working_dir}
   curl -LO https://github.com/git/git/archive/v${version}.tar.gz
   tar zxf v${version}.tar.gz
@@ -26,15 +33,12 @@ install_git() {
   sudo make prefix=${install_dir} install >> ${build_log} 2>&1
 }
 
-initialize_build_log() {
-  cat /dev/null > ${build_log}
-}
-
 if [ "$version" == "" ]; then
   echo 'usage: git install <version>'
   exit 1
 fi
 
+create_working_dir
 initialize_build_log
 
 if [ ! -d "${source_dir}" ]; then

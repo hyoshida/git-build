@@ -16,11 +16,7 @@
 
     **for Zsh**: Modify your ~/.zshrc file instead of ~/.bash_profile.
 
-3. Rehash your shell.
-
-    ```bash
-    $ rehash
-    ```
+3. Restart your shell.
 
 ## Usage
 

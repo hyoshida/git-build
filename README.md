@@ -5,13 +5,21 @@
 1. Download from GitHub.
 
     ```bash
-    git clone https://github.com/hyoshida/git-install.git
+    $ git clone https://github.com/hyoshida/git-install.git ~/.git-install
     ```
 
-2. Create a symbolic link to your `~/bin` directory.
+2. Add ~/.git-install/bin to your $PATH for access to the git-install command-line utility.
 
     ```bash
-    ln -s git-install/git-install ~/bin
+    $ echo 'export PATH="$HOME/.git-install/bin:$PATH"' >> ~/.bash_profile
+    ```
+
+    **for Zsh**: Modify your ~/.zshrc file instead of ~/.bash_profile.
+
+3. Rehash your shell.
+
+    ```bash
+    $ rehash
     ```
 
 ## Usage

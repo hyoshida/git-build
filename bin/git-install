@@ -1,6 +1,6 @@
 #!/bin/sh -e
 install_dir=/usr/local
-working_dir=~/.git-install
+working_dir=~/.git-install/versions
 version=$1
 source_dir=${working_dir}/git-${version}
 build_log=${working_dir}/git-${version}.log

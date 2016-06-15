@@ -1,0 +1,17 @@
+#!/bin/sh -e
+working_dir=~/.git-build
+version=$1
+
+if [ "$version" == "" ]; then
+  echo 'usage: git install <version>'
+  exit 1
+fi
+
+mkdir -p ${working_dir}
+cd ${working_dir}
+curl -LO https://github.com/git/git/archive/v${version}.tar.gz
+tar zxf v${version}.tar.gz
+rm v${version}.tar.gz
+cd git-${version}
+make prefix=/usr/local all
+sudo make prefix=/usr/local install

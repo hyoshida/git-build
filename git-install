@@ -3,8 +3,10 @@ install_dir=/usr/local
 working_dir=~/.git-build
 version=$1
 source_dir=${working_dir}/git-${version}
+build_log=${working_dir}/git-${version}.log
 
 download_git() {
+  echo 'Downloading...'
   mkdir -p ${working_dir}
   cd ${working_dir}
   curl -LO https://github.com/git/git/archive/v${version}.tar.gz
@@ -13,13 +15,19 @@ download_git() {
 }
 
 build_git() {
+  echo 'Building...'
   cd ${source_dir}
-  make prefix=${install_dir} all
+  make prefix=${install_dir} all >> ${build_log} 2>&1
 }
 
 install_git() {
+  echo 'Installing...'
   cd ${source_dir}
-  sudo make prefix=${install_dir} install
+  sudo make prefix=${install_dir} install >> ${build_log} 2>&1
+}
+
+initialize_build_log() {
+  cat /dev/null > ${build_log}
 }
 
 if [ "$version" == "" ]; then
@@ -27,9 +35,15 @@ if [ "$version" == "" ]; then
   exit 1
 fi
 
+initialize_build_log
+
 if [ ! -d "${source_dir}" ]; then
   download_git
   build_git
 fi
 
 install_git
+
+echo 'Successful! Your git version is:'
+echo -n '    '
+git version

@@ -1,20 +1,24 @@
 #!/bin/sh -e
-working_dir=~/.git-build
 install_dir=/usr/local
+working_dir=~/.git-build
 version=$1
+source_dir=${working_dir}/git-${version}
 
 download_git() {
+  mkdir -p ${working_dir}
+  cd ${working_dir}
   curl -LO https://github.com/git/git/archive/v${version}.tar.gz
   tar zxf v${version}.tar.gz
   rm v${version}.tar.gz
-  cd git-${version}
 }
 
 build_git() {
+  cd ${source_dir}
   make prefix=${install_dir} all
 }
 
 install_git() {
+  cd ${source_dir}
   sudo make prefix=${install_dir} install
 }
 
@@ -23,9 +27,9 @@ if [ "$version" == "" ]; then
   exit 1
 fi
 
-mkdir -p ${working_dir}
-cd ${working_dir}
+if [ ! -d "${source_dir}" ]; then
+  download_git
+  build_git
+fi
 
-download_git
-build_git
 install_git

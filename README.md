@@ -11,7 +11,7 @@
 2. Create a symbolic link to your `~/bin` directory.
 
     ```bash
-    ln -s git-install/git-install ~/
+    ln -s git-install/git-install ~/bin
     ```
 
 ## Usage

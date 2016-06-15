@@ -1,17 +1,17 @@
-# git-build
+# git-install
 
 ## Installation
 
 1. Download from GitHub.
 
     ```bash
-    git clone https://github.com/hyoshida/git-build.git
+    git clone https://github.com/hyoshida/git-install.git
     ```
 
 2. Create a symbolic link to your `~/bin` directory.
 
     ```bash
-    ln -s git-build/git-install ~/
+    ln -s git-install/git-install ~/
     ```
 
 ## Usage
